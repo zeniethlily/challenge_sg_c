@@ -53,8 +53,8 @@ Helpers should also be able to view unfulfilled lists. They should also be able 
 ### Get Started
 
 ```terminal
-
-  $ cd coronavirus_challenge
+  $ clone repo url
+  $ cd into dir
   $ npm install
   $ touch .env
 ```
