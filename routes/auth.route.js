@@ -1,55 +1,63 @@
 const router = require("express").Router();
 const User = require("../models/user.model");
-
+const List = require("../models/list.model");
 const passport = require("../config/passportConfig");
 const isLoggedIn = require("../config/loginBlocker");
 
 
 
-router.get("/signup", (req, res) => {
+router.get("/auth/signup", (req, res) => {
   res.render("auth/signup");
 });
 
-router.post("/signup", async (req, res) => {
+router.post("/auth/signup", async (req, res) => {
   console.log(req.body);
   try {
-    let { phone, password, firstname, lastname, dateOfBirth, role } = req.body;
-    let user = new User({
-      phone,
-      firstname, 
-      lastname, 
-      address: {
-        houseNo: req.body.houseNo, 
-        street: req.body.street, 
-        city: req.body.city, 
-        district: req.body.district,
-      },
-      dateOfBirth,
-      password,
-    });
-    if (role == "helper") {
+    let user = new User(req.body);
+
+    if (req.body.role == "helper") {
       user.isHelper = true;
-    } else {
+    } else if (req.body.role == "senior"){
       user.isSenior = true;
     }
+
     let savedUser = await user.save();
+
     if (savedUser) {
-      res.redirect("/auth/signin");
+      passport.authenticate("local", {
+        successRedirect: "/dashboard", //after login success
+        successFlash: "You have logged In!"
+      })(req, res);
     }
   } catch (error) {
     console.log(error);
   }
 });
 
-router.get("/signin", (req, res) => {
+router.get("/auth/signin", (req, res) => {
   res.render("auth/signin");
 });
 
+router.get("/dashboard", isLoggedIn, (req, res) => {
+  if(req.user.isSenior){
+    User.findById(req.user._id, "list")
+    .populate("list")
+    .then(user => {
+      let lists = user.list;
+      res.render("dashboard/index", { lists });
+    });
+  } else if(req.user.isHelper){
+    List.find({ status: "free" }).then(lists => {
+      res.render("dashboard/index", { lists });
+    });
+  }
+})
+
 //-- Login Route
 router.post(
-  "/signin",
+  "/auth/signin",
   passport.authenticate("local", {
-    successRedirect: "/", //after login success
+    successRedirect: "/dashboard", //after login success
     failureRedirect: "/auth/signin", //if fail
     failureFlash: "Invalid Username or Password",
     successFlash: "You have logged In!"
@@ -57,7 +65,7 @@ router.post(
 );
 
 //--- Logout Route
-router.get("/logout", (request, response) => {
+router.get("/auth/logout", (request, response) => {
   request.logout(); //clear and break session
   request.flash("success", "Dont leave please come back!");
   response.redirect("/auth/signin");

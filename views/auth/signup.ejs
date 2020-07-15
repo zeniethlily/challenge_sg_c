@@ -1,52 +1,55 @@
-<div class="container mt-3">
-    <h2>New User</h2>
-    
+<div class="container">
     <form action="/auth/signup" method="POST">
-        <div>
-            <label>First Name</label>
-            <input name="firstname" placeholder="First Name" />
+      <div class="row mb-3">
+        <div class="col-6">
+          <input name="firstname" class="form-control" placeholder="John/Jane" />
         </div>
-        <div>
-            <label>Last Name</label>
-            <input name="lastname" placeholder="Last Name" />
+        <div class="col-6">
+          <input name="lastname" class="form-control" placeholder="Doe" />
         </div>
-        <div>
-            <label>Phone</label>
-            <input name="phone" type="text" placeholder="9876543" />
+      </div>
+      <div class="row mb-3">
+        <div class="col-12">
+          <input name="age" class="form-control" placeholder="20" type="number" />
         </div>
-        <div>
-            <label>Password</label>
-            <input name="password" type="password" placeholder="******" />
+      </div>
+      <div class="row mb-3">
+        <div class="col-12">
+          <label>Address</label>
+          <input
+            name="adress"
+            class="form-control"
+            placeholder="20"
+            type="text"
+          />
         </div>
-        <h3>Address</h3>
-        <div>
-            <label>House No</label>
-            <input name="houseNo" type="number" placeholder="123" />
+      </div>
+      <div class="row mb-3">
+        <div class="col-6">
+          Senior
+          <input name="role" type="radio" class="form-control" value="senior" />
         </div>
-        <div>
-            <label>Street</label>
-            <input name="street" type="text" placeholder="abc street" />
+        <div class="col-6">
+          Helper
+          <input name="role" type="radio" class="form-control" value="helper" />
         </div>
-        <div>
-            <label>City</label>
-            <input name="city" type="text" placeholder="def city" />
+      </div>
+      <div class="row mb-3">
+        <div class="col-6">
+          <label>Phone</label>
+          <input name="phone" class="form-control" placeholder="John/Jane" />
         </div>
-        <div>
-            <label>District</label>
-            <input name="district" type="text" placeholder="def city" />
+        <div class="col-6">
+          <label>Password</label>
+          <input
+            name="password"
+            type="password"
+            class="form-control"
+            placeholder="*******"
+          />
         </div>
-        <div>
-            <label>Date of Birth</label>
-            <input name="dateOfBirth" type="date" placeholder=""/>
-        </div>
-        <div>
-            <label>Role</label>
-            <select name="role" id="">
-                <option value="helper">Helper</option>
-                <option value="senior">Senior</option>
-            </select>
-        </div>
-        <button type="submit">Create User</button>
-      </form>
+      </div>
+      <button class="btn btn-primary">Sign Up</button>
     </form>
-    </div>
+  </div>
+  

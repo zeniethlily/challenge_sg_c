@@ -47,9 +47,13 @@ server.use(function(request, response, next) {
   next();
 });
 
+server.get("/", (req, res) => {
+  res.redirect("/dashboard");
+});
 //routes go here
-server.use("/auth", require("./routes/auth.route"));
-server.use("/", require("./routes/main.route"));
+server.use("/s/", require("./routes/senior.route"));
+server.use("/h/", require("./routes/helper.route"));
+server.use(require("./routes/auth.route"));
 
 
 server.listen(process.env.PORT, () => {
