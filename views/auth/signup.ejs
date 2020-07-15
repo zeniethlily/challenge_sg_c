@@ -1,0 +1,52 @@
+<div class="container mt-3">
+    <h2>New User</h2>
+    
+    <form action="/auth/signup" method="POST">
+        <div>
+            <label>First Name</label>
+            <input name="firstname" placeholder="First Name" />
+        </div>
+        <div>
+            <label>Last Name</label>
+            <input name="lastname" placeholder="Last Name" />
+        </div>
+        <div>
+            <label>Phone</label>
+            <input name="phone" type="text" placeholder="9876543" />
+        </div>
+        <div>
+            <label>Password</label>
+            <input name="password" type="password" placeholder="******" />
+        </div>
+        <h3>Address</h3>
+        <div>
+            <label>House No</label>
+            <input name="houseNo" type="number" placeholder="123" />
+        </div>
+        <div>
+            <label>Street</label>
+            <input name="street" type="text" placeholder="abc street" />
+        </div>
+        <div>
+            <label>City</label>
+            <input name="city" type="text" placeholder="def city" />
+        </div>
+        <div>
+            <label>District</label>
+            <input name="district" type="text" placeholder="def city" />
+        </div>
+        <div>
+            <label>Date of Birth</label>
+            <input name="dateOfBirth" type="date" placeholder=""/>
+        </div>
+        <div>
+            <label>Role</label>
+            <select name="role" id="">
+                <option value="helper">Helper</option>
+                <option value="senior">Senior</option>
+            </select>
+        </div>
+        <button type="submit">Create User</button>
+      </form>
+    </form>
+    </div>
